@@ -24,7 +24,7 @@ public class ExpenseController {
         return "Welcome to expense-tracking version 1.0.0. New features will be added soon...";
     }
 
-    @GetMapping()
+    @GetMapping(path = "get")
     public List<Expense> getExpenseByIdorName(
             @RequestParam(required = false) Long id,
             @RequestParam(required = false) String name) {
@@ -46,7 +46,7 @@ public class ExpenseController {
         return result;
     }
 
-    @PostMapping
+    @PostMapping(path = "add")
     public Expense addExpense(@RequestBody Expense expense) {
         try {
             return expenseService.addExpense(expense);
@@ -59,7 +59,7 @@ public class ExpenseController {
         }
     }
 
-    @DeleteMapping(path = "{expenseId}")
+    @DeleteMapping(path = "delete/{expenseId}")
     public void deleteExpenseById(
             @PathVariable("expenseId") Long expenseId
     ) {
@@ -71,7 +71,7 @@ public class ExpenseController {
         }
     }
 
-    @PutMapping(path = "{oldExpenseId}")
+    @PutMapping(path = "update/{oldExpenseId}")
     public ResponseEntity<Expense> updateExpense(
             @PathVariable("oldExpenseId") Long oldExpenseId,
             @RequestBody Expense expense
